@@ -1,0 +1,172 @@
+[gd_scene load_steps=10 format=3 uid="uid://dm2a27bvttllk"]
+
+[ext_resource type="Script" path="res://Scripts/Player_Controller.cs" id="1_74ulc"]
+[ext_resource type="Texture2D" uid="uid://cs8elf6qv22ad" path="res://icon.svg" id="2_dkc2t"]
+[ext_resource type="Script" path="res://Scripts/Hand.cs" id="3_e80ra"]
+[ext_resource type="Texture2D" uid="uid://t32g85h05vlc" path="res://Sprites/Heal.png" id="4_1162t"]
+[ext_resource type="Texture2D" uid="uid://bg5gfoa5wieyr" path="res://Sprites/gun.png" id="5_k5hhw"]
+[ext_resource type="Texture2D" uid="uid://b4b78564ti05f" path="res://Sprites/Rifle.png" id="6_640fo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bpocb"]
+radius = 62.15
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_flnrj"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SystemFont" id="SystemFont_dkw45"]
+subpixel_positioning = 0
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+z_index = 1
+platform_wall_layers = 2
+safe_margin = 0.001
+script = ExtResource("1_74ulc")
+
+[node name="PlayerSprite2" type="Sprite2D" parent="."]
+texture = ExtResource("2_dkc2t")
+
+[node name="Hand" type="Node2D" parent="."]
+position = Vector2(0, 1)
+script = ExtResource("3_e80ra")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_bpocb")
+debug_color = Color(0, 0.6, 0.690196, 0.513726)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Canvas" type="CanvasLayer" parent="Camera2D"]
+
+[node name="Control" type="Control" parent="Camera2D/Canvas"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HPUI" type="ProgressBar" parent="Camera2D/Canvas/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -400.0
+offset_bottom = 40.0
+grow_horizontal = 0
+size_flags_horizontal = 10
+size_flags_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_flnrj")
+value = 100.0
+
+[node name="ShopPanel" type="Panel" parent="Camera2D/Canvas/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(5, 5)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Camera2D/Canvas/Control/ShopPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -20.0
+offset_right = 115.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical_scroll_mode = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D/Canvas/Control/ShopPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="HealthButt" type="Button" parent="Camera2D/Canvas/Control/ShopPanel/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.113725, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_dkw45")
+theme_override_font_sizes/font_size = 10
+text = "Heal 5HP
+(5$)"
+icon = ExtResource("4_1162t")
+icon_alignment = 1
+expand_icon = true
+
+[node name="GunButt" type="Button" parent="Camera2D/Canvas/Control/ShopPanel/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.113725, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_dkw45")
+theme_override_font_sizes/font_size = 10
+text = "GUN
+/30Ammo
+(10$)"
+icon = ExtResource("5_k5hhw")
+icon_alignment = 1
+expand_icon = true
+
+[node name="RifleButt" type="Button" parent="Camera2D/Canvas/Control/ShopPanel/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.113725, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_dkw45")
+theme_override_font_sizes/font_size = 10
+text = "Rifle
+/60Ammo
+(30$)"
+icon = ExtResource("6_640fo")
+icon_alignment = 1
+expand_icon = true
+
+[node name="AmmoCounter" type="Label" parent="Camera2D/Canvas/Control"]
+visible = false
+layout_mode = 1
+offset_right = 112.0
+offset_bottom = 42.0
+theme_override_font_sizes/font_size = 30
+text = "Ammo: "
+metadata/_edit_use_anchors_ = true
+
+[node name="MoneyUI" type="Label" parent="Camera2D/Canvas/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -132.0
+offset_top = 55.0
+offset_bottom = 97.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 30
+text = "Money: 0"
+horizontal_alignment = 1
+
+[node name="RoundUI" type="Label" parent="Camera2D/Canvas/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -83.5
+offset_right = 83.5
+offset_bottom = 42.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "Round 0: 0s"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Camera2D/Canvas/Control/ShopPanel/ScrollContainer/HBoxContainer/HealthButt" to="." method="_on_health_butt_pressed"]
+[connection signal="pressed" from="Camera2D/Canvas/Control/ShopPanel/ScrollContainer/HBoxContainer/GunButt" to="." method="_on_gun_butt_pressed"]
+[connection signal="pressed" from="Camera2D/Canvas/Control/ShopPanel/ScrollContainer/HBoxContainer/RifleButt" to="." method="_on_rifle_butt_pressed"]

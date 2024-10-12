@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://b05cerurh6frl"]
+
+[ext_resource type="Script" path="res://Scripts/Weapon.cs" id="1_vjgth"]
+[ext_resource type="Texture2D" uid="uid://bpu13e0tqk1ot" path="res://Sprites/Knife.png" id="2_o5cc7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hm38g"]
+
+[node name="Knife" type="StaticBody2D" groups=["Knife"]]
+position = Vector2(120, 0)
+script = ExtResource("1_vjgth")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_o5cc7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(5, 1)
+shape = SubResource("RectangleShape2D_hm38g")

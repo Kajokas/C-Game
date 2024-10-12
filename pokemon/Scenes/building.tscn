@@ -1,0 +1,96 @@
+[gd_scene load_steps=8 format=3 uid="uid://b8u2qv5rwdax8"]
+
+[ext_resource type="Script" path="res://Scripts/Shop.cs" id="1_mei3a"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_2e1gd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_33d31"]
+size = Vector2(1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1xovg"]
+size = Vector2(1.62, 11.43)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_uay42"]
+size = Vector2(600, 1000)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_4huex"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_361c8"]
+size = Vector2(1, 1)
+
+[node name="Building" type="Node2D"]
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="Wall2" type="StaticBody2D" parent="Walls"]
+modulate = Color(0.401505, 0.245923, 0, 1)
+z_index = -1
+position = Vector2(309, 0)
+rotation = 1.5708
+scale = Vector2(1000, 100)
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/Wall2"]
+texture = SubResource("PlaceholderTexture2D_2e1gd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall2"]
+shape = SubResource("RectangleShape2D_33d31")
+
+[node name="Wall3" type="StaticBody2D" parent="Walls"]
+modulate = Color(0.401505, 0.245923, 0, 1)
+z_index = -1
+position = Vector2(-288, -2)
+rotation = 1.5708
+scale = Vector2(1000, 100)
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/Wall3"]
+texture = SubResource("PlaceholderTexture2D_2e1gd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall3"]
+shape = SubResource("RectangleShape2D_33d31")
+
+[node name="Wall" type="StaticBody2D" parent="Walls"]
+modulate = Color(0.401505, 0.245923, 0, 1)
+z_index = -1
+position = Vector2(11, -457)
+scale = Vector2(500, 100)
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/Wall"]
+texture = SubResource("PlaceholderTexture2D_2e1gd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall"]
+shape = SubResource("RectangleShape2D_33d31")
+
+[node name="Wall4" type="StaticBody2D" parent="Walls"]
+z_index = -1
+position = Vector2(13, 452)
+scale = Vector2(500, 100)
+collision_layer = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls/Wall4"]
+texture = SubResource("PlaceholderTexture2D_2e1gd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall4"]
+shape = SubResource("RectangleShape2D_33d31")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls/Wall4"]
+position = Vector2(-0.038, -4.285)
+shape = SubResource("RectangleShape2D_1xovg")
+
+[node name="Floor" type="Sprite2D" parent="."]
+self_modulate = Color(0.129412, 0.0862745, 0.215686, 1)
+z_index = -2
+texture = SubResource("PlaceholderTexture2D_uay42")
+
+[node name="Shop" type="Area2D" parent="." groups=["Shop"]]
+position = Vector2(0, -338)
+scale = Vector2(300, 100)
+script = ExtResource("1_mei3a")
+
+[node name="Sprite2D" type="Sprite2D" parent="Shop"]
+texture = SubResource("PlaceholderTexture2D_4huex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shop"]
+shape = SubResource("RectangleShape2D_361c8")
+
+[connection signal="body_entered" from="Shop" to="Shop" method="_on_body_entered"]
+[connection signal="body_exited" from="Shop" to="Shop" method="_on_body_exited"]
